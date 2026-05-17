@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galactic Tactical Display</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
 
         :root {
             --holo-blue: #00ebff;
@@ -23,7 +23,7 @@
                 radial-gradient(2px 2px at 10% 90%, #fff, transparent),
                 linear-gradient(to bottom, #000 0%, #050a0f 100%);
             color: var(--holo-blue);
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Orbitron', 'Trebuchet MS', 'Impact', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -143,6 +143,8 @@
 
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(5px); z-index: 3000; display: flex; align-items: center; justify-content: center; }
         .modal-content { background: var(--panel-bg); border: 2px solid var(--holo-blue); padding: 20px; text-align: center; box-shadow: 0 0 50px rgba(0, 235, 255, 0.2); width: 250px; display: flex; flex-direction: column; gap: 15px; }
+        
+        .modal-content-amber-ready { border-color: var(--holo-blue); }
 
         .selection-grid { display: flex; gap: 20px; margin-top: 30px; }
         .selectable-card { cursor: pointer; pointer-events: auto !important; border: 1px solid rgba(0, 235, 255, 0.3); filter: grayscale(1); transition: 0.3s; }
@@ -164,7 +166,7 @@
 
         .header { text-align: center; margin-bottom: 20px; transform: rotateX(10deg); }
         h1 { font-weight: 900; font-size: 2rem; letter-spacing: 5px; text-shadow: 0 0 15px var(--holo-blue); animation: flicker 3s infinite; }
-        #status { font-size: 0.8rem; color: #bdc3c7; letter-spacing: 2px; }
+        #status { font-size: 0.8rem; color: #bdc3c7; letter-spacing: 2px; text-transform: uppercase; }
 
         .mark { font-size: 3.5rem; font-weight: 900; position: absolute; pointer-events: none; animation: holoSpawn 0.3s ease-out forwards;}
         @keyframes holoSpawn {
@@ -172,16 +174,22 @@
             100% { opacity: 1; transform: scale(1) translateZ(0); filter: brightness(1) blur(0); }
         }
 
-        .win-pulse { animation: winPulseEffect 0.6s infinite alternate; z-index: 1001; }
+        .win-pulse { animation: winPulseEffect 0.6s infinite alternate; z-index: 101; }
         @keyframes winPulseEffect {
             from { background: rgba(var(--win-rgb), 0.1); border-color: rgba(var(--win-rgb), 0.4); box-shadow: inset 0 0 10px rgba(var(--win-rgb), 1); }
             to { background: rgba(var(--win-rgb), 0.4); border-color: rgba(var(--win-rgb), 1); box-shadow: inset 0 0 30px rgba(var(--win-rgb), 1), 0 0 20px rgba(var(--win-rgb), 1); }
         }
 
         .controls { margin-top: 30px; display: flex; gap: 10px; }
+        
+        /* --- BUTTON SCHEMES --- */
         .btn { background: transparent; border: 1px solid var(--holo-blue); color: var(--holo-blue); padding: 8px 20px; font-family: 'Orbitron'; cursor: pointer; position: relative; z-index: 2; text-transform: uppercase; letter-spacing: 2px;}
         .btn:hover { background: var(--holo-blue); color: #000; box-shadow: 0 0 15px var(--holo-blue); }
+        
         .btn-warning { border-color: var(--guard-orange); color: var(--guard-orange); }
+        
+        .btn-amber-hover { border-color: var(--guard-orange); color: var(--guard-orange); }
+        .btn-amber-hover:hover { background: var(--guard-orange); color: #000; box-shadow: 0 0 15px var(--guard-orange); }
 
         .aurebesh { font-size: 0.5rem; opacity: 0.4; position: absolute; bottom: 3px; right: 3px; pointer-events: none; }
         @keyframes flicker { 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; } 20%, 24%, 55% { opacity: 0.6; } }
@@ -215,7 +223,7 @@
         <h1>ARCHIVE LOGS</h1>
         <div id="history-content" class="history-list"></div>
         <div class="controls">
-            <button class="btn btn-warning" onclick="wipeHistory()">Wipe Archives</button>
+            <button class="btn btn-amber-hover" onclick="wipeHistory()">Wipe Archives</button>
             <button class="btn" onclick="navigateTo('landing-page')">Back</button>
         </div>
     </div>
@@ -225,11 +233,11 @@
         <div class="menu-container">
             <div class="toggle-row">
                 <span>MUSIC</span>
-                <button class="btn" id="music-toggle" onclick="toggleSetting('music')">ON</button>
+                <button class="btn btn-amber-hover" id="music-toggle" onclick="toggleSetting('music')">ON</button>
             </div>
             <div class="toggle-row">
                 <span>SOUND</span>
-                <button class="btn" id="sound-toggle" onclick="toggleSetting('sound')">OFF</button>
+                <button class="btn btn-amber-hover" id="sound-toggle" onclick="toggleSetting('sound')">ON</button>
             </div>
             <button class="btn" onclick="navigateTo('landing-page')">Back</button>
         </div>
@@ -250,7 +258,7 @@
                 <div class="credit-name" style="font-size: 0.7rem; margin-top:20px;">© 2026 AARONDAKS STUDIOS</div>
             </div>
         </div>
-        <button class="btn" style="margin-top:20px;" onclick="navigateTo('landing-page')">Return</button>
+        <button class="btn btn-amber-hover" style="margin-top:20px;" onclick="navigateTo('landing-page')">Return</button>
     </div>
 
     <div id="mode-selection" class="view-section hidden scanline-overlay">
@@ -285,7 +293,7 @@
             </div>
         </div>
         <div class="controls">
-            <button class="btn" onclick="confirmAI()">Confirm Target</button>
+            <button class="btn btn-amber-hover" onclick="confirmAI()">Confirm Target</button>
             <button class="btn" onclick="navigateTo('mode-selection')">Back</button>
         </div>
     </div>
@@ -299,9 +307,9 @@
         <div class="game-viewport">
             <div id="card-X" class="player-card active-player" style="--active-color: var(--sith-red);">
                 <div class="card-img" style="background-image: url('images/maul.jpeg');"></div>
-                <div class="card-name" style="color: var(--sith-red)">Darth Maul</div>
-                <div class="card-desc">Offensive Strike Specialist.</div>
-                <div class="card-stats"><span>YOU</span><span>🔊</span></div>
+                <div id="p1-name" class="card-name" style="color: var(--sith-red)">Darth Maul</div>
+                <div id="p1-desc" class="card-desc">Offensive Strike Specialist.</div>
+                <div id="p1-identity" class="card-stats"><span>YOU</span><span>🔊</span></div>
             </div>
 
             <div class="board-container">
@@ -328,20 +336,37 @@
 
         <div class="controls">
             <button class="btn" onclick="toggleMenu(true)">MENU</button>
-            <button class="btn" onclick="resetGame()">RESET</button>
+            <button class="btn" onclick="resetGame(true)">RESET</button>
         </div>
     </div>
 
     <div id="menu-modal" class="modal-overlay hidden scanline-overlay">
         <div class="modal-content">
             <h2>PAUSED</h2>
-            <button class="btn" onclick="toggleMenu(false)">Resume Game</button>
-            <button class="btn" onclick="navigateTo('mode-selection'); toggleMenu(false);">New Game</button>
+            <button class="btn btn-amber-hover" onclick="toggleMenu(false)">Resume Game</button>
+            <button class="btn" onclick="navigateTo('mode-selection'); toggleMenu(false); AudioController.stopAllPlaybacks();">New Game</button>
             <button class="btn" onclick="exitToMain()">Exit</button>
         </div>
     </div>
 
     <script>
+        // ========================================================
+        //               MASTER AUDIO VOLUME MIXER
+        // ========================================================
+        const VolumeMixer = {
+            ambientMusic: 0.99,      
+            uiClicks: 0.35,          
+            victoryThemes: 0.60      
+        };
+
+        const StrikeVolumes = {
+            maul: 0.40,     
+            chop: 0.25,     
+            guard: 0.35,    
+            ahsoka: 0.55,   
+            pvp: 0.40       
+        };
+
         const cells = document.querySelectorAll('.cell');
         const statusText = document.getElementById('status');
         const cardX = document.getElementById('card-X');
@@ -354,7 +379,157 @@
         let selectedAI = null;
         let gameMode = 'pvp';
 
-        const settings = { music: true, sound: false };
+        const settings = { music: true, sound: true };
+
+        // --- AUDIO ENGINE CONTROLLER ---
+        const AudioController = {
+            src: {
+                //system_access: 'https://assets.mixkit.co/active_storage/sfx/2568/2568-84.wav', 
+                //btn_click: 'https://assets.mixkit.co/active_storage/sfx/2571/2571-84.wav',
+                game_start: 'audio/in-game-sound.mp3', 
+                credits_theme: 'audio/credits.mp3',
+                
+                // Previews
+                //card_chop: 'audio/driod-sound-card.mp3',     
+                //card_guard: 'https://assets.mixkit.co/active_storage/sfx/2567/2567-84.wav',    
+                //card_ahsoka: 'https://assets.mixkit.co/active_storage/sfx/2585/2585-84.wav',
+
+                // Placements
+                strike_maul: 'audio/darth-maul-strike.mp3',   
+                strike_chop: 'audio/darth-maul-strike.mp3',   
+                strike_guard: 'audio/darth-maul-strike.mp3',  
+                strike_ahsoka: 'audio/darth-maul-strike.mp3', 
+                strike_pvp: 'audio/darth-maul-strike.mp3',
+
+                // One-Shot Character Victory Themes
+                //win_maul: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',   
+                //win_chop: 'audio/driod-winning.mp3',   
+                //win_guard: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',  
+                //win_ahsoka: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3', 
+                //win_pvp: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3'     
+            },
+        
+
+
+
+            
+            musicInstance: null,
+            winInstance: null,
+            creditsInstance: null,
+
+            play(type) {
+                if (!settings.sound) return;
+                try {
+                    const audio = new Audio(this.src[type]);
+                    
+                    if (type.startsWith('strike_')) {
+                        const characterKey = type.split('_')[1];
+                        audio.volume = StrikeVolumes[characterKey] || 0.50;
+                    } else if (type === 'btn_click' || type === 'system_access' || type.startsWith('card_')) {
+                        audio.volume = VolumeMixer.uiClicks;
+                    } else {
+                        audio.volume = 0.40;
+                    }
+                    
+                    audio.play().catch(error => console.log(`Audio safe-blocked: ${type}`));
+                } catch (e) {
+                    console.error("Audio failure:", e);
+                }
+            },
+
+            startMusic() {
+                if (!settings.music) return;
+                this.stopWinTheme(); 
+                this.stopCreditsMusic();
+                try {
+                    if (!this.musicInstance) {
+                        this.musicInstance = new Audio(this.src.game_start);
+                        this.musicInstance.loop = true;
+                    }
+                    this.musicInstance.volume = VolumeMixer.ambientMusic;
+                    this.musicInstance.currentTime = 0; 
+                    this.musicInstance.play().catch(e => console.log("Music context deferred."));
+                } catch (e) {
+                    console.error("Music engine issue:", e);
+                }
+            },
+
+            stopMusic() {
+                if (this.musicInstance) {
+                    this.musicInstance.pause();
+                    this.musicInstance.currentTime = 0; 
+                }
+            },
+
+            startCreditsMusic() {
+                if (!settings.music) return;
+                this.stopMusic();
+                this.stopWinTheme();
+                try {
+                    if (!this.creditsInstance) {
+                        this.creditsInstance = new Audio(this.src.credits_theme);
+                        this.creditsInstance.loop = true;
+                    }
+                    this.creditsInstance.volume = VolumeMixer.ambientMusic;
+                    this.creditsInstance.currentTime = 0;
+                    this.creditsInstance.play().catch(e => console.log("Credits music context deferred."));
+                } catch (e) {
+                    console.error("Credits music error:", e);
+                }
+            },
+
+            stopCreditsMusic() {
+                if (this.creditsInstance) {
+                    this.creditsInstance.pause();
+                    this.creditsInstance.currentTime = 0;
+                }
+            },
+
+            playWinTheme(characterKey) {
+                this.stopMusic(); 
+                this.stopWinTheme(); 
+                this.stopCreditsMusic();
+                if (!settings.music) return;
+
+                try {
+                    const winAssetKey = `win_${characterKey}`;
+                    if (this.src[winAssetKey]) {
+                        this.winInstance = new Audio(this.src[winAssetKey]);
+                        this.winInstance.loop = false; 
+                        this.winInstance.volume = VolumeMixer.victoryThemes;
+                        this.winInstance.play().catch(e => console.log("Win audio context deferred."));
+                    }
+                } catch (e) {
+                    console.error("Win theme engine error:", e);
+                }
+            },
+
+            stopWinTheme() {
+                if (this.winInstance) {
+                    this.winInstance.pause();
+                    this.winInstance.currentTime = 0;
+                    this.winInstance = null;
+                }
+            },
+
+            stopAllPlaybacks() {
+                this.stopMusic();
+                this.stopWinTheme();
+                this.stopCreditsMusic();
+            }
+        };
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('click', () => {
+                AudioController.play('system_access');
+            }, { once: true });
+        });
+
+        document.addEventListener('click', (e) => {
+            if ((e.target.tagName === 'BUTTON' || e.target.classList.contains('btn')) && !e.target.classList.contains('cell')) {
+                AudioController.play('btn_click');
+            }
+        });
 
         const characters = {
             chop: { name: "Chopper", desc: "Erratic Astromech Protocol.", color: "#e67e22", rgb: "230, 126, 34", img: "images/chopper.jpeg", diff: "EASY" },
@@ -376,7 +551,7 @@
                     await screen.orientation.lock('landscape').catch(e => console.log("Orientation lock failed"));
                 }
             } catch (err) {
-                console.log("Interaction required for Fullscreen/Orientation.");
+                console.log("Interaction restriction observed.");
             }
             document.getElementById('mobile-trigger-container').style.display = 'none';
         }
@@ -384,11 +559,41 @@
         function navigateTo(viewId) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.add('hidden'));
             document.getElementById(viewId).classList.remove('hidden');
+            
+            // Route credits tracking loops
+            if (viewId === 'credits-screen') {
+                AudioController.startCreditsMusic();
+            } else if (viewId === 'landing-page') {
+                AudioController.stopCreditsMusic();
+            }
         }
 
         function toggleSetting(key) {
             settings[key] = !settings[key];
             document.getElementById(`${key}-toggle`).innerText = settings[key] ? "ON" : "OFF";
+            if (key === 'music' && !settings.music) {
+                AudioController.stopAllPlaybacks();
+            } else if (key === 'music' && settings.music) {
+                if (!document.getElementById('credits-screen').classList.contains('hidden')) {
+                    AudioController.startCreditsMusic();
+                } else if (!active && (state.includes("X") || state.includes("O"))) {
+                    const winningChar = currentPlayer === "X" ? "maul" : (gameMode === 'pvp' ? 'pvp' : selectedAI);
+                    if (!state.includes("") && !checkWin()) return; 
+                    AudioController.playWinTheme(winningChar);
+                } else if (!document.getElementById('game-view').classList.contains('hidden')) {
+                    AudioController.startMusic();
+                }
+            }
+        }
+
+        // Returns name based on current string token & game context rules
+        function getCharacterName(playerToken) {
+            if (playerToken === "X") {
+                return (gameMode === 'pvp') ? "PLAYER 1" : "DARTH MAUL";
+            } else {
+                const charKey = gameMode === 'pvp' ? 'pvp' : selectedAI;
+                return characters[charKey].name.toUpperCase();
+            }
         }
 
         function showHistory() {
@@ -414,12 +619,18 @@
 
         function selectMode(mode) {
             gameMode = mode;
-            if (mode === 'pvp') { setupOpponent('pvp'); navigateTo('game-view'); } 
-            else { navigateTo('ai-selection'); }
+            if (mode === 'pvp') { 
+                setupOpponent('pvp'); 
+                navigateTo('game-view'); 
+                AudioController.startMusic(); 
+            } else { 
+                navigateTo('ai-selection'); 
+            }
         }
 
         function pickAI(key) {
             selectedAI = key;
+            AudioController.play(`card_${key}`); 
             document.querySelectorAll('.selectable-card').forEach(c => c.classList.remove('selected'));
             const cards = ['chop', 'guard', 'ahsoka'];
             document.getElementById(`ai-${cards.indexOf(key) + 1}`).classList.add('selected');
@@ -429,24 +640,53 @@
             if (!selectedAI) return alert("SELECT TARGET TO PROCEED");
             setupOpponent(selectedAI);
             navigateTo('game-view');
+            AudioController.startMusic(); 
         }
 
         function setupOpponent(key) {
             const char = characters[key];
+            
+            const p1NameElement = document.getElementById('p1-name');
+            const p1DescElement = document.getElementById('p1-desc');
+            const p1IdentityElement = document.getElementById('p1-identity');
+            
+            if (key === 'pvp') {
+                p1NameElement.innerText = "Player 1";
+                p1DescElement.innerText = "Local Combatant.";
+                p1IdentityElement.innerHTML = `<span>LOCAL</span><span>🔊</span>`;
+            } else {
+                p1NameElement.innerText = "Darth Maul";
+                p1DescElement.innerText = "Offensive Strike Specialist.";
+                p1IdentityElement.innerHTML = `<span>YOU</span><span>🔊</span>`;
+            }
+
             document.getElementById('p2-img').style.backgroundImage = `url('${char.img}')`;
             document.getElementById('p2-name').innerText = char.name;
             document.getElementById('p2-name').style.color = char.color;
             document.getElementById('p2-desc').innerText = char.desc;
             document.getElementById('p2-diff').innerHTML = `<span>DIFFICULTY</span><span>${char.diff}</span>`;
             cardO.style.setProperty('--active-color', char.color);
-            resetGame();
+            resetGame(false);
         }
 
         function toggleMenu(show) { menuModal.classList.toggle('hidden', !show); }
-        function exitToMain() { toggleMenu(false); navigateTo('landing-page'); }
+        
+        function exitToMain() { 
+            toggleMenu(false); 
+            AudioController.stopAllPlaybacks(); 
+            navigateTo('landing-page'); 
+        }
 
         function makeMove(i) {
             if (state[i] || !active) return;
+            
+            if (currentPlayer === "X") {
+                AudioController.play('strike_maul');
+            } else {
+                const audioKey = gameMode === 'pvp' ? 'pvp' : selectedAI;
+                AudioController.play(`strike_${audioKey}`);
+            }
+
             state[i] = currentPlayer;
             const span = document.createElement('span');
             const charKey = gameMode === 'pvp' ? 'pvp' : selectedAI;
@@ -456,19 +696,24 @@
             span.style.textShadow = `0 0 15px ${color}`;
             span.innerText = currentPlayer;
             cells[i].appendChild(span);
+            
             if (checkWin()) {
-                statusText.innerText = `VICTORY: ${currentPlayer}`;
-                statusText.style.color = color;
                 active = false;
+                const winningChar = currentPlayer === "X" ? "maul" : (gameMode === 'pvp' ? 'pvp' : selectedAI);
+                AudioController.playWinTheme(winningChar);
                 saveMatch(currentPlayer === 'X' ? 'WIN' : 'LOSS');
             } else if (!state.includes("")) {
                 statusText.innerText = "TIE DETECTED";
                 statusText.style.color = "#bdc3c7";
                 active = false;
+                AudioController.stopMusic(); 
                 saveMatch('DRAW');
             } else {
                 currentPlayer = currentPlayer === "X" ? "O" : "X";
-                statusText.innerText = `TURN: ${currentPlayer}`;
+                
+                // Track dynamic names during system runtime shifts
+                statusText.innerText = `TURN: ${getCharacterName(currentPlayer)}`;
+                
                 cardX.classList.toggle('active-player');
                 cardO.classList.toggle('active-player');
                 if (gameMode === 'pvsai' && currentPlayer === "O") setTimeout(aiStrike, 600);
@@ -506,6 +751,10 @@
                 if (state[a] && state[a] === state[b] && state[a] === state[c]) {
                     const charKey = gameMode === 'pvp' ? 'pvp' : selectedAI;
                     const rgb = currentPlayer === "X" ? "255, 0, 60" : characters[charKey].rgb;
+                    
+                    statusText.innerText = `VICTORY: ${getCharacterName(currentPlayer)}`;
+                    statusText.style.color = currentPlayer === "X" ? "var(--sith-red)" : characters[charKey].color;
+
                     [a, b, c].forEach(idx => {
                         cells[idx].style.setProperty('--win-rgb', rgb);
                         cells[idx].classList.add('win-pulse');
@@ -516,10 +765,12 @@
             return false;
         }
 
-        function resetGame() {
+        function resetGame(triggerMusicReboot = false) {
             state = ["", "", "", "", "", "", "", "", ""];
             active = true; currentPlayer = "X";
-            statusText.innerText = "Scanning for Lifeforms...";
+            
+            // Re-render initial context name configuration
+            statusText.innerText = `TURN: ${getCharacterName(currentPlayer)}`;
             statusText.style.color = "#bdc3c7";
             cardX.classList.add('active-player');
             cardO.classList.remove('active-player');
@@ -528,6 +779,11 @@
                 c.innerHTML = aur;
                 c.classList.remove('win-pulse');
             });
+            
+            AudioController.stopWinTheme();
+            if (triggerMusicReboot) {
+                AudioController.startMusic();
+            }
         }
 
         cells.forEach(c => c.addEventListener('click', (e) => {
